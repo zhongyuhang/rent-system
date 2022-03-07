@@ -1,0 +1,7 @@
+pool: 99
+adapter: mysql2
+username: root
+password: root
+database: ziroom2021_1108
+host: localhost
+port: 3306

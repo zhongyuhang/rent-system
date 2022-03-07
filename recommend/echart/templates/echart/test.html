@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Some charts</title>
+    <meta name="author" content="Matthew Howell"/>
+    <meta name="description" content="fullPage continuous scrolling demo."/>
+    <meta name="keywords" content="fullpage,jquery,demo,scroll,loop,continuous"/>
+    <meta name="Resource-type" content="Document"/>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'echart/css/fullpage.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'echart/css/examples.css' %}"/>
+
+</head>
+<body>
+<ul id="menu">
+    <li data-menuanchor="firstPage" class="active"><a href="#firstPage">图表一</a></li>
+    <li data-menuanchor="secondPage"><a href="#secondPage">图表二</a></li>
+    <li data-menuanchor="3rdPage"><a href="#3rdPage">图表三</a></li>
+    <li data-menuanchor="4thPage"><a href="#4thPage">图表四</a></li>
+    <li data-menuanchor="lastPage"><a href="#lastPage">图表五</a></li>
+</ul>
+
+<div id="fullpage">
+
+    <div class="section active" id="section0">
+        <div class="intro center-block">
+            <iframe src="https://maplab.amap.com/share/mapv/aa2d9df6956ec7b5ce8eeef1b779c73c" style="height:600px;width: 85%;margin-left: auto;margin-right: auto;"></iframe>
+        </div>
+
+    </div>
+    <div class="section " id="section1">
+        <div class="intro center-block">
+            <div id="main" style="height:600px;width: 85%;margin-left: auto;margin-right: auto;"></div>
+        </div>
+    </div>
+    <div class="section" id="section2">
+        <div class="intro">
+            <h1>Section 3</h1>
+        </div>
+    </div>
+    <div class="section" id="section3">
+        <div class="intro">
+            <h1>Section 4</h1>
+        </div>
+    </div>
+    <div class="section" id="section4">
+        <div class="intro">
+            <h1>Section 3</h1>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'echart/js/fullpage.js' %}"></script>
+<script type="text/javascript" src="{% static 'echart/js/examples.js' %}"></script>
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', 'whitesmoke', '#ccddff'],
+        anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage', 'lastPage'],
+        navigation: true,
+        navigationTooltips: ['', '', '', '', ''],
+        showActiveTooltip: true,
+        menu: '#menu',
+        lazyLoad: true,
+        loopTop: true,
+        loopBottom: true,
+    });
+</script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    require.config({
+        paths: {
+            echarts: "http://echarts.baidu.com/build/dist",
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+        ],
+        function (ec) {
+            // 基于准备好的dom，初始化echarts图表
+            const myChart = ec.init(document.getElementById('main'));
+
+            const option = {
+                tooltip: {
+                    show: true
+                },
+                legend: {
+                    data: ['上海房源数量前五（按地铁站分）']
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ["上大路","上海体育场","上南路","延长路","华夏东路","徐泾东"]
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        "name": "上海房源数量前五（根据地铁站）",
+                        "type": "bar",
+                        "data": [108, 105, 100, 81, 67, 36]
+                    }
+                ]
+            };
+
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+        }
+    );
+</script>
+</body>
+</html>

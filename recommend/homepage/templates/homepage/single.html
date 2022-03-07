@@ -1,0 +1,140 @@
+﻿{% load  static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CSS3鼠标经过立体翻转切换特效</title>
+
+    <link rel="stylesheet" href="{% static 'person/css/it/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'person/css/it/style.css' %}"/>
+
+    <script type="text/javascript" src="{% static 'person/js/it/jquery-1.7.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'person/js/it/global.js' %}"></script>
+
+</head>
+<body>
+
+<div class="regularly-box">
+    <div class="regularly-head">
+        <strong>房源统计</strong>
+    </div>
+    <div class="regularly-contBody">
+        <ul class="regularly-item-list">
+            <li class="first viewport-flip">
+                <div class="flip-box flip out">
+                    <dl class="flip-lists">
+                        <dd>
+                            <i class="hot"></i>
+                            <h3><b>整租套数</b></h3>
+                            <div class="flip-itmes-info">
+                                <strong>{{ scale_zheng }}%</strong>
+                                <span class="to-day"><em>{{ zhengzu_house }}</em>套</span>
+                                <div class="to-price">均价：<label>{{ ave_price.house_price__avg }}</label></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3>合租套数</h3>
+                            <div class="flip-itmes-info">
+                                <strong>{{ scale_he }}%</strong>
+                                <span class="to-day"><em>{{ hezu_house }}</em>套</span>
+                                <div class="to-price">均价：<label>{{ ave_pricetwo.house_price__avg }}</label>
+                                </div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3></h3>
+                            <div class="flip-itmes-info">
+                                <strong style="margin-left: auto;margin-right: auto">
+                                    <a href="{% url 'search:index' %}">找房去</a>
+                                </strong>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="flip-box flip">
+                    <div class="item-title">上海</div>
+                    <div class="item-tx" style="color: #ac2925">房源数量：{{ all_house }}套</div>
+                    <div class="item-tx" style="color: #ac2925">房源均价：<label>{{ all_avg.house_price__avg }}</label></div>
+                    <div class="flip-foot">关键词：贵</div>
+                </div>
+            </li>
+            <li class="viewport-flip">
+                <div class="flip-box flip out">
+                    <dl class="flip-lists">
+                        <dd>
+                            <i class="hot"></i>
+                            <h3>整租套数</h3>
+                            <div class="flip-itmes-info">
+                                <strong>待开发</strong>
+                                <span class="to-day"><em>待开发</em></span>
+                                <div class="to-price">均价：<label>待开发</label></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3>合租套数</h3>
+                            <div class="flip-itmes-info">
+                                <strong>待开发</strong>
+                                <span class="to-day"><em>待开发</em></span>
+                                <div class="to-price">均价：<label>待开发</label></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3></h3>
+                            <div class="flip-itmes-info">
+                                <strong style="margin-left: auto;margin-right: auto">
+                                    <a href="#">找房去</a>
+                                </strong>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="flip-box flip">
+                    <div class="item-title">上海</div>
+                    <div class="item-tx" style="color: #ac2925">房源数量：待开发</div>
+                    <div class="item-tx" style="color: #ac2925">房源均价：<label>待开发</label></div>
+                    <div class="flip-foot">关键词：待开发</div>
+                </div>
+            </li>
+            <li class="last viewport-flip">
+                <div class="flip-box flip out">
+                    <dl class="flip-lists">
+                        <dd>
+                            <i class="hot"></i>
+                            <h3>整租套数</h3>
+                            <div class="flip-itmes-info">
+                                <strong>待开发</strong>
+                                <span class="to-day"><em>待开发</em></span>
+                                <div class="to-price">均价：<label>待开发</label></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3>合租套数</h3>
+                            <div class="flip-itmes-info">
+                                <strong>待开发</strong>
+                                <span class="to-day"><em>待开发</em>套</span>
+                                <div class="to-price">均价：<label>待开发</label></div>
+                            </div>
+                        </dd>
+                        <dd>
+                            <h3></h3>
+                            <div class="flip-itmes-info">
+                                <strong style="margin-left: auto;margin-right: auto">
+                                    <a href="#">找房去</a>
+                                </strong>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="flip-box flip">
+                    <div class="item-title">上海</div>
+                    <div class="item-tx" style="color: #ac2925">房源数量：待开发</div>
+                    <div class="item-tx" style="color: #ac2925">房源均价：<label>待开发</label></div>
+                    <div class="flip-foot">关键词：待开发</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

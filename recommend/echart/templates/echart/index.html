@@ -1,0 +1,358 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>数据可视化</title>
+    <meta name="author" content="Matthew Howell"/>
+    <meta name="description" content="fullPage continuous scrolling demo."/>
+    <meta name="keywords" content="fullpage,jquery,demo,scroll,loop,continuous"/>
+    <meta name="Resource-type" content="Document"/>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'echart/css/fullpage.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'echart/css/examples.css' %}"/>
+    <script src="{% static 'echart/js/echarts.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'homepage/css/it/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'homepage/css/it/style.css' %}"/>
+
+    <script type="text/javascript" src="{% static 'homepage/js/it/jquery-1.7.2.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'homepage/js/it/global.js' %}"></script>
+    <script src="{% static 'echart/js/echarts.min.js' %}"></script>
+    <script src="{% static 'echart/js/echarts-gl.min.js' %}"></script>
+</head>
+<body>
+<ul id="menu">
+    <li data-menuanchor="firstPage" class="active"><a href="#firstPage">房源统计</a></li>
+    <li data-menuanchor="secondPage"><a href="#secondPage">房源排行榜</a></li>
+    <li data-menuanchor="3rdPage"><a href="#3rdPage">房源数量</a></li>
+    <li data-menuanchor="4thPage"><a href="#4thPage">房源描点</a></li>
+    <li data-menuanchor="lastPage"><a href="#lastPage">最近数据</a></li>
+</ul>
+
+<div id="fullpage">
+    <div class="section active" id="section0">
+        <div class="regularly-box" style="text-align: left">
+            <div class="regularly-head">
+                <strong>房源统计</strong>
+            </div>
+            <div class="regularly-contBody">
+                <ul class="regularly-item-list">
+                    <li class="first viewport-flip">
+                        <div class="flip-box flip out">
+                            <dl class="flip-lists">
+                                <dd>
+                                    <i class="hot"></i>
+                                    <h3><b>整租套数</b></h3>
+                                    <div class="flip-itmes-info">
+                                        <strong>{{ scale_zheng }}%</strong>
+                                        <span class="to-day"><em>{{ zhengzu_house }}</em>套</span>
+                                        <div class="to-price">均价：<label>{{ ave_price.house_price__avg }}</label></div>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <h3>合租套数</h3>
+                                    <div class="flip-itmes-info">
+                                        <strong>{{ scale_he }}%</strong>
+                                        <span class="to-day"><em>{{ hezu_house }}</em>套</span>
+                                        <div class="to-price">均价：<label>{{ ave_pricetwo.house_price__avg }}</label>
+                                        </div>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <h3></h3>
+                                    <div class="flip-itmes-info">
+                                        <strong style="margin-left: auto;margin-right: auto">
+                                            <a href="{% url 'search:index' %}">找房去</a>
+                                        </strong>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="flip-box flip">
+                            <div class="item-title">成都</div>
+                            <div class="item-tx" style="color: #ac2925">房源数量：{{ all_house }}套</div>
+                            <div class="item-tx" style="color: #ac2925">
+                                房源均价：<label>{{ all_avg.house_price__avg }}</label></div>
+                            <div class="flip-foot">关键词：贵</div>
+                        </div>
+                    </li>
+                    <li class="viewport-flip">
+                        <div class="flip-box flip out">
+                            <dl class="flip-lists">
+                                <dd>
+                                    <i class="hot"></i>
+                                    <h3>整租套数</h3>
+                                    <div class="flip-itmes-info">
+                                        <strong>待开发</strong>
+                                        <span class="to-day"><em>待开发</em></span>
+                                        <div class="to-price">均价：<label>待开发</label></div>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <h3>合租套数</h3>
+                                    <div class="flip-itmes-info">
+                                        <strong>待开发</strong>
+                                        <span class="to-day"><em>待开发</em></span>
+                                        <div class="to-price">均价：<label>待开发</label></div>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <h3></h3>
+                                    <div class="flip-itmes-info">
+                                        <strong style="margin-left: auto;margin-right: auto">
+                                            <a href="#">找房去</a>
+                                        </strong>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="flip-box flip">
+                            <div class="item-title">北京</div>
+                            <div class="item-tx" style="color: #ac2925">房源数量：待开发</div>
+                            <div class="item-tx" style="color: #ac2925">房源均价：<label>待开发</label></div>
+                            <div class="flip-foot">关键词：待开发</div>
+                        </div>
+                    </li>
+                    <li class="last viewport-flip">
+                        <div class="flip-box flip out">
+                            <dl class="flip-lists">
+                                <dd>
+                                    <i class="hot"></i>
+                                    <h3>整租套数</h3>
+                                    <div class="flip-itmes-info">
+                                        <strong>待开发</strong>
+                                        <span class="to-day"><em>待开发</em></span>
+                                        <div class="to-price">均价：<label>待开发</label></div>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <h3>合租套数</h3>
+                                    <div class="flip-itmes-info">
+                                        <strong>待开发</strong>
+                                        <span class="to-day"><em>待开发</em>套</span>
+                                        <div class="to-price">均价：<label>待开发</label></div>
+                                    </div>
+                                </dd>
+                                <dd>
+                                    <h3></h3>
+                                    <div class="flip-itmes-info">
+                                        <strong style="margin-left: auto;margin-right: auto">
+                                            <a href="#">找房去</a>
+                                        </strong>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="flip-box flip">
+                            <div class="item-title">上海</div>
+                            <div class="item-tx" style="color: #ac2925">房源数量：待开发</div>
+                            <div class="item-tx" style="color: #ac2925">房源均价：<label>待开发</label></div>
+                            <div class="flip-foot">关键词：待开发</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="section " id="section1">
+        <div class="intro center-block">
+            <div id="main" style="height:600px;width: 85%;margin-left: auto;margin-right: auto;"></div>
+        </div>
+    </div>
+    <div class="section" id="section2">
+        <div class="intro">
+            <div id="main1" style="height:600px;width: 85%;margin-left: auto;margin-right: auto;"></div>
+        </div>
+    </div>
+    <div class="section" id="section3">
+
+        <div class="intro center-block">
+            <iframe src="https://maplab.amap.com/share/mapv/aa2d9df6956ec7b5ce8eeef1b779c73c"
+                    style="height:600px;width: 85%;margin-left: auto;margin-right: auto;"></iframe>
+        </div>
+    </div>
+    <div class="section" id="section4">
+        <div class="intro">
+            <div id="main2" style="height:600px;width: 85%;margin-left: auto;margin-right: auto;"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'echart/js/fullpage.js' %}"></script>
+<script type="text/javascript" src="{% static 'echart/js/examples.js' %}"></script>
+<script type="text/javascript">
+    var myFullpage = new fullpage('#fullpage', {
+        sectionsColor: ['#ccddff', '#4BBFC3', '#7BAABE', '#1bbc9b', 'whitesmoke'],
+        anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage', 'lastPage'],
+        navigation: true,
+        navigationTooltips: ['', '', '', '', ''],
+        showActiveTooltip: true,
+        menu: '#menu',
+        lazyLoad: true,
+        loopTop: true,
+        loopBottom: true,
+    });
+</script>
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main1'));
+    var option = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [4900, 5100, 5200, 6200, 7700, 6250, 11110],
+            type: 'line'
+        }]
+    };
+    myChart.setOption(option);
+</script>
+<script type="text/javascript">
+    const subway = new Array(6);
+    const number = new Array(6);
+    {% for house in houses %}
+        subway[{{ forloop.counter0 }}] = "{{ house.house_subway }}";
+        number[{{ forloop.counter0 }}] = {{ house.total_houses }};
+    {% endfor %}
+    require.config({
+        paths: {
+            echarts: "http://echarts.baidu.com/build/dist",
+        }
+    });
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+        ],
+        function (ec) {
+            // 基于准备好的dom，初始化echarts图表
+            const myChart = ec.init(document.getElementById('main'));
+
+            const option = {
+                tooltip: {
+                    show: true
+                },
+                legend: {
+                    data: ['成都房源数量前六（按地铁站分）']
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: subway,
+                        {#data: ["上大路","上海体育场","上南路","延长路","华夏东路","徐泾东"]#}
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        "name": "成都房源数量前五（根据地铁站）",
+                        "type": "bar",
+                        "data": number
+                    }
+                ]
+            };
+
+            // 为echarts对象加载数据
+            myChart.setOption(option);
+        }
+    );
+</script>
+<script>
+    var myChart = echarts.init(document.getElementById('main2'));
+    var days = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+    var area = ['8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'];
+    {#三维数据 x:星期 y:面积 z:价格#}
+    var data = [];
+
+    {% for current_house in current_houses %}
+        var tmp = [];
+        tmp[0] = Math.floor(Math.random() * 7);
+        tmp[1] = Math.floor({{ current_house.house_area }});
+        tmp[2] = {{ current_house.house_price }};
+        data.push(tmp);
+    {% endfor %}
+    var option = {
+        tooltip: {},
+        visualMap: {
+            max: 5400,
+            min: 2300,
+            inRange: {
+                color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61',
+                    '#f46d43', '#d73027', '#a50026']
+            }
+        },
+        xAxis3D: {
+            type: 'category',
+            data: days,
+            name: '日期'
+        },
+        yAxis3D: {
+            type: 'category',
+            data: area,
+            name: '面积'
+        },
+        zAxis3D: {
+            type: 'value',
+            name: '价格'
+        },
+        grid3D: {
+            boxWidth: 200,
+            boxDepth: 80,
+            light: {
+                main: {
+                    intensity: 1.2
+                },
+                ambient: {
+                    intensity: 0.3
+                }
+            }
+        },
+        series: [{
+            type: 'bar3D',
+            data: data.map(function (item) {
+                return {
+                    value: [item[0], item[1], item[2]]
+                }
+            }),
+            shading: 'color',
+
+            label: {
+                show: false,
+                textStyle: {
+                    fontSize: 16,
+                    borderWidth: 1
+                }
+            },
+
+            itemStyle: {
+                opacity: 0.4
+            },
+
+            emphasis: {
+                label: {
+                    textStyle: {
+                        fontSize: 20,
+                        color: '#900'
+                    }
+                },
+                itemStyle: {
+                    color: '#900'
+                }
+            }
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

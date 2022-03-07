@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-decoration: none;
+    }
+
+    #dh {
+        height: 30px;
+        width: 600px;
+        margin-top: 0;
+        margin-right: auto;
+        margin-bottom: 0;
+        margin-left: auto;
+    }
+
+    table.hovertable {
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        margin-top: 30px;
+        border-width: 1px;
+        border-color: #81db34;
+        border-collapse: collapse;
+    }
+
+    table.hovertable th {
+        background-color: #c7254e;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #FFFFFF;
+    }
+
+    table.hovertable tr {
+        background-color: #FFFFFF;
+    }
+
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #000000;
+        white-space: nowrap;
+    }
+</style>
+<body>
+<div id="dh">
+    <table class="hovertable">
+        <tr>
+            <th>得分</th>
+            <th>小区</th>
+            <th>价格</th>
+            <th>URL</th>
+            <th>面积</th>
+            <th>楼层</th>
+            <th>租赁方式</th>
+            <th>骑车路径规划</th>
+            <th>步行路径规划</th>
+            <th>公交路径规划</th>
+            <th>驾车路径规划</th>
+        </tr>
+        {% for house in houses %}
+            <tr onmouseover="this.style.backgroundColor='#d58512';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+                <td>{{ house.house_score }}</td>
+                <td>{{ house.house_title }}</td>
+                <td>{{ house.house_price }}</td>
+                <td><a href="{{ house.house_url }} " target="_blank">查看</a></td>
+                <td>{{ house.house_area }}</td>
+                <td>{{ house.house_floor }}</td>
+                <td>{{ house.house_rent }}</td>
+                <td><a href="{% url 'commute:bicycle' house.house_geocode company_geocode %}" target="_blank">骑自行车</a></td>
+                <td><a href="{% url 'commute:walk' house.house_geocode company_geocode %}" target="_blank">走路</a></td>
+                <td><a href="{% url 'commute:bus' house.house_geocode company_geocode %}" target="_blank">公交</a></td>
+                <td><a href="{% url 'commute:drive' house.house_geocode company_geocode %}" target="_blank">开车</a></td>
+                {#            [116.399028, 39.845042], [116.436281, 39.880719]#}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
