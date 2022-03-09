@@ -2,6 +2,6 @@ pool: 99
 adapter: mysql2
 username: root
 password: root
-database: ziroom2021_1108
+database: ziroom2022
 host: localhost
 port: 3306

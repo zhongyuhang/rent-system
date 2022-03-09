@@ -6,21 +6,21 @@ from django.core.cache import cache
 import pandas as pd
 from sklearn.cluster import KMeans
 import numpy as np
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
     # 房子查找页面的主页
     return render(request, 'search/index.html')
 
+@csrf_exempt
 def search_house(request):
     company, subway = request.POST['info'].split('+')
     md_key = f"{company}-{subway}"
     destination = UtilClass().getGeocode(company)
     if cache.has_key(md_key):
-        print('find record')
         houses = cache.get(md_key)
     else:
-        print('there is no record')
         houses = rate_the_house(destination, subway)
         cache.set(md_key, houses, 60 * 60)
     data = {'houses': houses, 'company_geocode': destination}
@@ -63,9 +63,8 @@ def rate_the_house(destination, subway):
         houses[i]['house_score'] = score[i]
     return sorted(houses, key=lambda score: score['house_score'], reverse=True)
 
-
 def get_house_data(subway):
-    return House.objects.filter(house_subway=subway)[:10]
+    return House.objects.filter(house_subway=subway)[:20]
 
 def get_KFC(geoCode, key_word=u'肯德基'):
     para = {'location': geoCode, 'city': '成都', 'keywords': key_word,

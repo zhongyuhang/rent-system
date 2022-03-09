@@ -17,4 +17,5 @@ class House(models.Model):
 	house_price = models.IntegerField("价格")
 	house_rent = models.CharField("租赁方式(合租、整租)", max_length=20)
 	class Meta:
+		managed = False
 		db_table = "search_house"

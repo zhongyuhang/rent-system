@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-g&f-k&xa^um6m1og7_q%t@r+sn@#e*y!dcx(o1vje9pq#(ik2!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -80,11 +81,12 @@ WSGI_APPLICATION = 'recommend.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
-		'NAME': 'ziroom2021_1108',
-		'HOSE': '127.0.0.1',
+		'NAME': 'recommend',
+		# 'HOST': '127.0.0.1',
+        'HOST': 'db',
 		'USER': 'root',
-		'PORT': '3306',
 		'PASSWORD': 'root',
+		'PORT': '3306',
 	}
 }
 
@@ -109,9 +111,12 @@ AUTH_PASSWORD_VALIDATORS = [
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        # "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://redis:6379",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100},
+            "SOCKET_TIMEOUT": 10,
         }
     }
 }
@@ -131,6 +136,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
 # Default primary key field type

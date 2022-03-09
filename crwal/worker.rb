@@ -313,10 +313,10 @@ def parse_price
   end
 end
 
-# init_run_keys
-# forage_room_list
-# forage_room_simple
-# forage_room_detail_page
-# forage_room_detail
-# get_geocode
+init_run_keys
+forage_room_list
+forage_room_simple
+forage_room_detail_page
+forage_room_detail
+get_geocode
 parse_price
