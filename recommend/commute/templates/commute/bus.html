@@ -41,7 +41,7 @@
         }
     </script>
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
-    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=117420608ce240030f8672b08e0e0f41&plugin=AMap.Driving"></script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=117420608ce240030f8672b08e0e0f41&plugin=AMap.Transfer"></script>
     <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 </head>
 <body>
@@ -57,6 +57,7 @@
     //构造路线导航类
     var transfer = new AMap.Transfer({
         map: map,
+        city: "成都市",
         panel: "panel"
     }); 
     // 根据起终点经纬度规划驾车导航路线
